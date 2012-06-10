@@ -27,6 +27,15 @@ app.post '/', (request, response)->
   redis.set('lastCommit', JSON.stringify(commit))
   response.send commit
 
+app.post '/hook', (request, response)->
+
+  # Already parsed
+  commit = request.body
+
+
+  redis.set('lastCommit', JSON.stringify(commit))
+  response.send commit
+
 
 port = process.env.PORT || 5000
 app.listen(port, ->
