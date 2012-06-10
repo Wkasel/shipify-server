@@ -18,6 +18,13 @@ app.get '/', (request, response)->
   redis.get 'commit', (err, value) ->
     response.send(value)
 
+app.get '/jsonp', (request, response)->
+
+  callback = 'parseCommit'
+  redis.get 'commit', (err, value) ->
+    response.send("#{callback}(#{value})")
+
+
 app.post '/', (request, response)->
 
   # Already parsed
