@@ -15,25 +15,22 @@ app.use(express.bodyParser())
 #
 app.get '/', (request, response)->
 
-  redis.get 'lastCommit', (err, value) ->
+  redis.get 'commit', (err, value) ->
     response.send(value)
 
 app.post '/', (request, response)->
 
   # Already parsed
-  commit = request.body
+  payload = JSON.parse(request.body.payload)
 
+  lastCommit = payload.commits[payload.commits.length-1]
 
-  redis.set('lastCommit', JSON.stringify(commit))
-  response.send commit
+  commit =
+    username: lastCommit.committer.username
+    message: lastCommit.message
+    timestamp: lastCommit.timestamp
 
-app.post '/hook', (request, response)->
-
-  # Already parsed
-  commit = request.body
-
-
-  redis.set('lastCommit', JSON.stringify(commit))
+  redis.set('commit', JSON.stringify(commit))
   response.send commit
 
 
