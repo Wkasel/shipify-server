@@ -44,7 +44,7 @@ app.listen(port, ->
 
 io.sockets.on 'connection', (socket)->
   console.log "Connected"
-  socket.emit 'commit', { hello: 'world' })
+  socket.emit 'commit', { hello: 'world' }
 
   socket.on 'my other event', (data)->
     console.log(data)
