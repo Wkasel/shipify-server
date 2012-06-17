@@ -46,10 +46,3 @@ port = process.env.PORT || 5000
 app.listen(port, ->
   console.log("Listening on " + port)
 )
-
-
-# io.sockets.on 'connection', (socket)->
-#   socket.emit 'connected', { connected: 'Hell yes' }
-
-#   socket.on 'my other event', (data)->
-#     console.log(data)

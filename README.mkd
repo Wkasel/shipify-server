@@ -1,0 +1,16 @@
+# shipify-server
+
+Play themesongs for people whenever they ship code to github. Use along with [shipify](https://github.com/Grouper/shipify)
+
+## Getting started
+
+This is designed to run on Heroku
+
+    % heroku create --stack cedar
+    % git push heroku master
+    % heroku ps:scale app=1
+
+## Running locally
+
+Use supervisor for development
+supervisor -e 'node|js|coffee' web.js
