@@ -16,7 +16,7 @@ app.use(express.bodyParser())
 #
 
 app.get '/trigger', (request, response)->
-  io.sockets.emit 'commit', { triggered: 'triggered' })
+  io.sockets.emit 'commit', { triggered: 'triggered' }
   response.send "Triggered"
 
 
