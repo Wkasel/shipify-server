@@ -2,7 +2,6 @@ express = require('express')
 
 app = express.createServer(express.logger())
 io = require('socket.io').listen(app);
-redis = require('redis-url').connect(process.env.REDISTOGO_URL)
 
 # Config
 #
@@ -16,7 +15,9 @@ app.use(express.bodyParser())
 #
 
 app.get '/trigger', (request, response)->
-  io.sockets.emit 'commit', { triggered: 'triggered' }
+  io.sockets.emit 'commit', 
+    username: 'nottombrown'
+    message: "Test message"
   response.send "Triggered"
 
 
@@ -31,7 +32,8 @@ app.post '/callback', (request, response)->
     message: lastCommit.message
     timestamp: lastCommit.timestamp
 
-  redis.set('commit', JSON.stringify(commit))
+  io.sockets.emit 'commit', commit
+
   response.send commit
 
 
