@@ -8,6 +8,9 @@ io = require('socket.io').listen(app);
 #
 #
 app.use(express.bodyParser())
+io.configure ->
+  io.set("transports", ["xhr-polling"])
+  io.set("polling duration", 10)
 
 # Process
 #
