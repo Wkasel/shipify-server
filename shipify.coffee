@@ -15,8 +15,12 @@ app.use(express.bodyParser())
 #
 #
 
-app.post '/callback', (request, response)->
+app.get '/trigger', (request, response)->
+  io.sockets.emit 'commit', { triggered: 'triggered' })
+  response.send "Triggered"
 
+
+app.post '/callback', (request, response)->
   # Already parsed
   payload = JSON.parse(request.body.payload)
 
@@ -39,8 +43,8 @@ app.listen(port, ->
 
 
 io.sockets.on 'connection', (socket)->
-
-  socket.emit('news', { hello: 'world' })
+  console.log "Connected"
+  socket.emit 'commit', { hello: 'world' })
 
   socket.on 'my other event', (data)->
     console.log(data)
