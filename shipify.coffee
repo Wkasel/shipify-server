@@ -15,7 +15,7 @@ app.use(express.bodyParser())
 #
 
 app.get '/trigger', (request, response)->
-  io.sockets.emit 'commit', 
+  io.sockets.emit 'commit',
     username: 'nottombrown'
     message: "Test message"
   response.send "Triggered"
@@ -45,8 +45,7 @@ app.listen(port, ->
 
 
 io.sockets.on 'connection', (socket)->
-  console.log "Connected"
-  socket.emit 'commit', { hello: 'world' }
+  socket.emit 'connected', { connected: 'Hell yes' }
 
   socket.on 'my other event', (data)->
     console.log(data)
