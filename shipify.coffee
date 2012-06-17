@@ -21,7 +21,8 @@ app.get '/trigger', (request, response)->
   response.send "Triggered"
 
 
-app.post '/callback', (request, response)->
+app.post '/', (request, response)->
+
   # Already parsed
   payload = JSON.parse(request.body.payload)
 
@@ -44,8 +45,8 @@ app.listen(port, ->
 )
 
 
-io.sockets.on 'connection', (socket)->
-  socket.emit 'connected', { connected: 'Hell yes' }
+# io.sockets.on 'connection', (socket)->
+#   socket.emit 'connected', { connected: 'Hell yes' }
 
-  socket.on 'my other event', (data)->
-    console.log(data)
+#   socket.on 'my other event', (data)->
+#     console.log(data)
